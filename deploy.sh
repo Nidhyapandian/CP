@@ -1,9 +1,6 @@
 #! /bin/bash
 # GET CURRENT BRANCH:
-BRANCH_NAME = 'env.GIT_BRANCH.split('/').last()'
-
-
-
+BRANCH_NAME =${BRANCH_NAME:-$( 'env.GIT_BRANCH.split('/').last()')}
 
 if [[ "${BRANCH_NAME}" == "dev" ]]; then
 	./build.sh
