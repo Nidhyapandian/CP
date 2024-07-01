@@ -12,12 +12,15 @@ pipeline {
         withCredentials([usernamePassword(credentialsId: "${DOCKER_REGISTRY_CREDS}", passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
           sh "echo \$DOCKER_PASSWORD | docker login -u \$DOCKER_USERNAME --password-stdin docker.io"   
           sh 'docker-compose down'
-          sh 'docker stop web'
-          sh 'docker rm -f web'
-          sh 'chmod +x deploy.sh'
           sh './deploy.sh'
         }
       }
     }
+   post{
+     always{
+          sh 'docker stop web'
+          sh 'docker rm -f web'
+     }
+   }          
   }
 }
