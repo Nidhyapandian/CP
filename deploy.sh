@@ -7,7 +7,7 @@ BRANCH_NAME = $(git rev-parse --abbrev -ref HEAD)
 
 if [[ "${BRANCH_NAME}" == "dev" ]]; then
 	./build.sh
-	DOCKER_REPO ="smart24/myapp-dev"
+	DOCKER_REPO="smart24/myapp-dev"
 
 elif [[ "${BRANCH_NAME}" == "main" ]]; then
 	./build.sh
