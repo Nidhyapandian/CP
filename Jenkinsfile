@@ -18,15 +18,5 @@ pipeline {
           }
         }
       }
-       post{
-         always{
-            sh 'docker stop web'
-            sh 'docker rm -f web'
-            sh 'docker-compose up -d'
-            catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                   echo "CI/CD pipeline completed successfully.\n\nCheck the application"
-              }      
-           }          
-        }
    }
 
