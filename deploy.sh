@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Check if the branch is dev
-if [ "$GIT_BRANCH" = "dev" ]; then
+if [ "$GIT_BRANCH" == "dev" ]; then
     # Docker build and push
     echo "Building Docker image..."
     docker build -t smart24/dev:dev .
@@ -11,7 +11,7 @@ if [ "$GIT_BRANCH" = "dev" ]; then
     
     echo "Docker image pushed successfully."
     
-elif [ "$GIT_BRANCH" = "main" ]; then
+elif [ "$GIT_BRANCH" == "main" ]; then
     # Docker build and push
     echo "Building Docker image..."
     docker build -t smart24/prod:prod .
