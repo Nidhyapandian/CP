@@ -13,6 +13,7 @@ pipeline {
             sh "echo \$DOCKER_PASSWORD | docker login -u \$DOCKER_USERNAME --password-stdin docker.io"   
             sh 'docker-compose down'
             sh './deploy.sh'
+            }
           }
         }
       }
@@ -26,4 +27,4 @@ pipeline {
            }          
         }
    }
-}
+
