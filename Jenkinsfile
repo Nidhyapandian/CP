@@ -11,8 +11,7 @@ pipeline {
       }
     }
   } 
-    
-    stages {
+  
         stage('Get Branch Name') {
             steps {
                 script {
@@ -21,7 +20,7 @@ pipeline {
             }
         }
     }
-  } 
+   
     
     post {
         always {
