@@ -21,7 +21,7 @@ pipeline {
       
     post {
         always {
-            echo "Branch Name: ${BRANCH_NAME}"
+            echo "Branch Name is : ${BRANCH_NAME}"
         }
     }
 }
