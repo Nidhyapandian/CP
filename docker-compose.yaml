@@ -1,10 +1,10 @@
 version: '3'
 services:
-  web:
+  container1:
     build:
        context: .
        dockerfile: Dockerfile
     image: nginximage
-    container_name: web
+    container_name: container1
     ports:
      - 5000:80
