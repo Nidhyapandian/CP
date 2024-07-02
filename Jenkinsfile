@@ -26,6 +26,7 @@ pipeline {
             echo "Branch Name is : ${BRANCH_NAME}"
             sh 'docker stop web'
             sh 'docker rm web'
+            sh 'docker-compose up -d'
         }
     }
 }
