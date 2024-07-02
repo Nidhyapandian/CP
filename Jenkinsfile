@@ -22,6 +22,8 @@ pipeline {
           sh "echo \$DOCKER_PASSWORD | docker login -u \$DOCKER_USERNAME --password-stdin docker.io"
           sh "docker tag nginximage smart24/nginximg"
           sh 'docker push smart24/nginximg'
+
+          
     }
    }
   }
