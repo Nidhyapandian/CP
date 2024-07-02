@@ -25,6 +25,8 @@ pipeline {
     post {
         always {
             echo "Branch Name is : ${BRANCH_NAME}"
+            sh 'docker stop web'
+            sh 'docker rm web'
         }
     }
 }
