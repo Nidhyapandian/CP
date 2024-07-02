@@ -8,11 +8,11 @@ BRANCH_NAME = $(git rev-parse --abbrev -ref HEAD)
 if [[ "${BRANCH_NAME}" == "dev" ]]; then
 
 	./build.sh
-	DOCKER_REPO="smart24/myapp-dev"
+	DOCKER_REPO="smart24/nginximage-dev"
 
 elif [[ "${BRANCH_NAME}" == "main" ]]; then
 	./build.sh
-	DOCKER_REPO ="smart24/myapp-prod"
+	DOCKER_REPO ="smart24/ngincimage-prod"
 	
 else echo "Branch not configured for deployment" exit 1
 fi
