@@ -24,4 +24,5 @@ pipeline {
             echo "Branch Name: ${BRANCH_NAME}"
         }
     }
+}
 
