@@ -18,16 +18,14 @@ pipeline {
                 }
             }
         }
+     stage('Deploy') {
+      steps {
+        withCredentials([usernamePassword(credentialsId: "${DOCKER_REGISTRY_CREDS}", passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
+          sh "echo \$DOCKER_PASSWORD | docker login -u \$DOCKER_USERNAME --password-stdin docker.io"
+          sh "docker tag nginx smart24/nginximg :v1"
+          sh 'docker push $DOCKER_BFLASK_IMAGE'
     }
-
-      
-    post {
-        always {
-            echo "Branch Name is : ${BRANCH_NAME}"
-            sh 'docker stop web'
-            sh 'docker rm web'
-            sh 'docker-compose up -d'
-        }
-    }
+   }
+  }
 }
-
+}
