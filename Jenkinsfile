@@ -9,10 +9,8 @@ pipeline {
         sh 'chmod +x build.sh'
         sh './build.sh'
       }
-    }
-  } 
-  
-        stage('Get Branch Name') {
+    } 
+       stage('Get Branch Name') {
             steps {
                 script {
                     BRANCH_NAME = sh(script: 'git rev-parse --abbrev-ref HEAD', returnStdout: true).trim()
