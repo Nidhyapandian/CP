@@ -10,6 +10,7 @@ pipeline {
         sh './build.sh'
       }
     }
+  } 
     
     stages {
         stage('Get Branch Name') {
