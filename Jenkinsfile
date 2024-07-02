@@ -1,3 +1,6 @@
+
+def BRANCH_NAME
+
 pipeline {
   agent any
   stages {
@@ -7,12 +10,21 @@ pipeline {
         sh './build.sh'
       }
     }
-      stage('Deploy') {
-        steps {
-            sh 'chmod +x deploy.sh'
-            sh './deploy.sh'
+    
+    stages {
+        stage('Get Branch Name') {
+            steps {
+                script {
+                    BRANCH_NAME = sh(script: 'git rev-parse --abbrev-ref HEAD', returnStdout: true).trim()
+                }
             }
-          }
         }
-      }
-   
+    }
+  } 
+    
+    post {
+        always {
+            echo "Branch Name: ${BRANCH_NAME}"
+        }
+    }
+}
