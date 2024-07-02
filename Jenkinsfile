@@ -18,8 +18,7 @@ pipeline {
             }
         }
     }
-   
-    
+      
     post {
         always {
             echo "Branch Name: ${BRANCH_NAME}"
