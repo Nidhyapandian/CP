@@ -10,14 +10,17 @@ pipeline {
         sh './build.sh'
       }
     } 
-       stage('Get Branch Name') {
+       stage('Print Branch Name') {
             steps {
                 script {
-                    BRANCH_NAME = sh(script: 'git rev-parse --abbrev-ref HEAD', returnStdout: true).trim()
+                    // Define BRANCH_NAME using env.GIT_BRANCH
+                    def BRANCH_NAME = env.GIT_BRANCH.split('/').last()
+                    echo "Current branch name: ${BRANCH_NAME}"
                 }
             }
         }
     }
+
       
     post {
         always {
