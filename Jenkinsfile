@@ -1,20 +1,16 @@
 pipeline {
   agent any
-  stages {
-    stage('Build') {
-      steps {
-        sh 'chmod +x build.sh'
-        sh './build.sh'
-      }
-    } 
-
-     stage('Deploy') {
+    environment {
+       		def BRANCH_NAME = env.GIT_BRANCH.split('/').last()
+        	    }
+stages{
+     stage('Build') {
 	 
       steps {
         withCredentials([usernamePassword(credentialsId: "${DOCKER_REGISTRY_CREDS}", passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
         	sh "echo \$DOCKER_PASSWORD | docker login -u \$DOCKER_USERNAME --password-stdin docker.io" 
 		script {
-                     def BRANCH_NAME = env.GIT_BRANCH.split('/').last()
+                     
 			  if ( "${BRANCH_NAME}" == "dev" ) {
                              sh'chmod +x build.sh'
 	                     sh' ./build.sh'
@@ -35,6 +31,12 @@ pipeline {
 			  echo "Branch not configured for deployment" exit 1
 		  } 
                   fi
+		    stage('Deploy') {
+      			steps {
+      				sh 'chmod +x build.sh'
+        			sh './build.sh'
+			      }
+    			} 
 
                    }                 
                 }
