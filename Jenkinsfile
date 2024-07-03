@@ -22,7 +22,7 @@ pipeline {
                         sh'chmod +x build.sh'
 	                     sh' ./build.sh'
 	                      DOCKER_REPO="smart24/nginximage-dev"
-                        docker tag myapp:${BUILD_NUMBER} $DOCKER_REPO:${BUILD_NUMBER}
+                
                         docker push $DOCKER_REPO:${BUILD_NUMBER}
                         docker push $DOCKER_REPO:latest
 
@@ -30,7 +30,7 @@ pipeline {
                           sh'chmod +x build.sh'
 	                        sh'./build.sh'
 	                        DOCKER_REPO ="smart24/nginximage-prod"
-	                        docker tag myapp:${BUILD_NUMBER} $DOCKER_REPO:${BUILD_NUMBER}
+	                        
                           docker push $DOCKER_REPO:${BUILD_NUMBER}
                           docker push $DOCKER_REPO:latest
                   else echo "Branch not configured for deployment" exit 1
