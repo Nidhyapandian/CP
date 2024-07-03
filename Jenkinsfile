@@ -18,14 +18,24 @@ pipeline {
         withCredentials([usernamePassword(credentialsId: "${DOCKER_REGISTRY_CREDS}", passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
         	sh "echo \$DOCKER_PASSWORD | docker login -u \$DOCKER_USERNAME --password-stdin docker.io" 
                   script {
-                    if (BRANCH_NAME == 'dev') {
-                        // Build and push to dev repository
-                        docker.build("nginximage:latest").push("${DOCKER_REPO_DEV/nginximage:latest})
-                    } else if (BRANCH_NAME == 'main') {
-                        // Build and push to prod repository
-                        docker.build("nginximage:latest").push("${DOCKER_REPO_PROD/nginximage:latest})
-                    } else {
-                        echo "Not on a branch that requires Docker image build."
+                   if [[ "${BRANCH_NAME}" == "dev" ]]; then
+                        chmod +x build.sh
+	                      ./build.sh
+	                      DOCKER_REPO="smart24/nginximage-dev"
+                        docker tag myapp:${BUILD_NUMBER} $DOCKER_REPO:${BUILD_NUMBER}
+                        docker push $DOCKER_REPO:${BUILD_NUMBER}
+                        docker push $DOCKER_REPO:latest
+
+                  elif [[ "${BRANCH_NAME}" == "main" ]]; then
+                          chmod +x build.sh
+	                        ./build.sh
+	                        DOCKER_REPO ="smart24/nginximage-prod"
+	                        docker tag myapp:${BUILD_NUMBER} $DOCKER_REPO:${BUILD_NUMBER}
+                          docker push $DOCKER_REPO:${BUILD_NUMBER}
+                          docker push $DOCKER_REPO:latest
+                  else echo "Branch not configured for deployment" exit 1
+                  fi
+
                    }                 
                 }
             }
