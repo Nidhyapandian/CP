@@ -25,6 +25,7 @@ pipeline {
             sh './deploy.sh'
             }
           }
+         }
         }
       }
-   }
+   
