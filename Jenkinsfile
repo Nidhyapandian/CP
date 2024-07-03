@@ -22,7 +22,7 @@ pipeline {
                         sh'chmod +x build.sh'
 	                     sh' ./build.sh'
 	                      DOCKER_REPO="smart24/nginximage-dev"
-                
+                 docker.image("nginximage:${BUILD_NUMBER}").tag("${DOCKER_REPO}:${BUILD_NUMBER}")
                         docker push $DOCKER_REPO:${BUILD_NUMBER}
                         docker push $DOCKER_REPO:latest
 
