@@ -21,6 +21,7 @@ pipeline {
         withCredentials([usernamePassword(credentialsId: "${DOCKER_REGISTRY_CREDS}", passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
           sh "echo \$DOCKER_PASSWORD | docker login -u \$DOCKER_USERNAME --password-stdin docker.io"
           sh ''' if ("${BRANCH_NAME}" == "dev" ) then
+	  	    chmod +x script.sh
 	  	    chmod +x build.sh
                     ./build.sh
 	            DOCKER_REPO="smart24/dev:v1 "
@@ -29,6 +30,7 @@ pipeline {
                     docker push $DOCKER_REPO:latest
 
           elif ( "${BRANCH_NAME}" == "main" ) then
+	  	  chmod +x script.sh
 	          chmod +x build.sh
                   ./build.sh
 		  DOCKER_REPO ="smart24/prod:v2 "
