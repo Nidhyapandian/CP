@@ -22,14 +22,14 @@ pipeline {
           sh "echo \$DOCKER_PASSWORD | docker login -u \$DOCKER_USERNAME --password-stdin docker.io"
           if ("${BRANCH_NAME}" == "dev" ) then
 	            ./build.sh
-	            DOCKER_REPO="smart24/dev:v1 \n"
+	            DOCKER_REPO="smart24/dev:v1 "
               	    docker tag myapp:${BUILD_NUMBER} $DOCKER_REPO:${BUILD_NUMBER}
                     docker push $DOCKER_REPO:${BUILD_NUMBER}
                     docker push $DOCKER_REPO:latest
 
           elif ( "${BRANCH_NAME}" == "main" ) then
 	          ./build.sh
-	          DOCKER_REPO ="smart24/prod:v2 \n"
+	          DOCKER_REPO ="smart24/prod:v2 "
 	          docker tag myapp:${BUILD_NUMBER} $DOCKER_REPO:${BUILD_NUMBER}
                   docker push $DOCKER_REPO:${BUILD_NUMBER}
                   docker push $DOCKER_REPO:latest
