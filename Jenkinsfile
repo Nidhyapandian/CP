@@ -7,11 +7,7 @@ pipeline {
         sh './build.sh'
       }
     } 
- environment {
-        // Define Docker repository URLs
-        DEV_DOCKER_REPO = "smart24/dev:v1"
-        PROD_DOCKER_REPO = "smart24/prod:v2"
-    }
+  }
   
      stage('Deploy') {
       steps {
