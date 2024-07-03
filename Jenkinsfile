@@ -14,8 +14,9 @@ pipeline {
         withCredentials([usernamePassword(credentialsId: "${DOCKER_REGISTRY_CREDS}", passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
         	sh "echo \$DOCKER_PASSWORD | docker login -u \$DOCKER_USERNAME --password-stdin docker.io" 
                   environment {
-        BRANCH_NAME = "${env.GIT_BRANCH.split('/')[1]}" // Extract branch name without remote prefix
-    }  
+                     name 'BRANCH_NAME'			  
+        	     BRANCH_NAME = "${env.GIT_BRANCH.split('/')[1]}" // Extract branch name without remote prefix
+    			      }  
 		script {
                     
 			  if ( "${BRANCH_NAME}" == "dev" ) {
