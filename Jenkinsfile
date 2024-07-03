@@ -34,7 +34,8 @@ pipeline {
 			  	docker.image("${DOCKER_REPO}:${BUILD_NUMBER}").push()
 				docker.image("${DOCKER_REPO}:latest").push()                          
                           	
-                  else echo "Branch not configured for deployment" exit 1
+                  else 
+			  echo "Branch not configured for deployment" exit 1
                   fi
 
                    }                 
