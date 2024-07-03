@@ -5,6 +5,7 @@ pipeline {
         	    }
 stages{
      stage('Build') {
+	     steps {
 		script {
                      
 			  if ( "${BRANCH_NAME}" == "dev" ) {
@@ -32,6 +33,7 @@ stages{
                    }                 
                 }
             }
+}
         
     
 
