@@ -1,5 +1,11 @@
 pipeline {
   agent any
+   environment {
+        // Extracting the branch name from env.GIT_BRANCH
+        BRANCH_NAME = env.GIT_BRANCH.split('/').last()
+        DOCKER_REPO_DEV = 'dev' // Replace with your dev Docker Hub repository
+        DOCKER_REPO_PROD = 'prod' // Replace with your prod Docker Hub repository
+    }	
   stages {
     stage('Build') {
       steps {
@@ -7,12 +13,7 @@ pipeline {
         sh './build.sh'
       }
     } 
-  environment {
-        // Extracting the branch name from env.GIT_BRANCH
-        BRANCH_NAME = env.GIT_BRANCH.split('/').last()
-        DOCKER_REPO_DEV = 'dev' // Replace with your dev Docker Hub repository
-        DOCKER_REPO_PROD = 'prod' // Replace with your prod Docker Hub repository
-    }
+
      stage('Deploy') {
       steps {
         withCredentials([usernamePassword(credentialsId: "${DOCKER_REGISTRY_CREDS}", passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
