@@ -19,16 +19,16 @@ pipeline {
         	sh "echo \$DOCKER_PASSWORD | docker login -u \$DOCKER_USERNAME --password-stdin docker.io" 
                   script {
                    if ( "${BRANCH_NAME}" == "dev" ) then
-                        chmod +x build.sh
-	                      ./build.sh
+                        sh'chmod +x build.sh'
+	                     sh' ./build.sh'
 	                      DOCKER_REPO="smart24/nginximage-dev"
                         docker tag myapp:${BUILD_NUMBER} $DOCKER_REPO:${BUILD_NUMBER}
                         docker push $DOCKER_REPO:${BUILD_NUMBER}
                         docker push $DOCKER_REPO:latest
 
                   elif ( "${BRANCH_NAME}" == "main" ) then
-                          chmod +x build.sh
-	                        ./build.sh
+                          sh'chmod +x build.sh'
+	                        sh'./build.sh'
 	                        DOCKER_REPO ="smart24/nginximage-prod"
 	                        docker tag myapp:${BUILD_NUMBER} $DOCKER_REPO:${BUILD_NUMBER}
                           docker push $DOCKER_REPO:${BUILD_NUMBER}
