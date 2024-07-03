@@ -24,7 +24,7 @@ pipeline {
 	                      DOCKER_REPO="smart24/nginximage-dev"
                 	      docker.image("nginximage:${BUILD_NUMBER}").tag("${DOCKER_REPO}:${BUILD_NUMBER}")
                               docker.image("${DOCKER_REPO}:${BUILD_NUMBER}").push()
-                              docker push $DOCKER_REPO:latest
+                              docker.image("${DOCKER_REPO}:latest").push()
 
                   elif ( "${BRANCH_NAME}" == "main" ) then
                           sh'chmod +x build.sh'
@@ -32,8 +32,8 @@ pipeline {
 	                        DOCKER_REPO ="smart24/nginximage-prod"
 	                        docker.image("nginximage:${BUILD_NUMBER}").tag("${DOCKER_REPO}:${BUILD_NUMBER}")
 			  	docker.image("${DOCKER_REPO}:${BUILD_NUMBER}").push()
-                          
-                          	docker push $DOCKER_REPO:latest
+				docker.image("${DOCKER_REPO}:latest").push()                          
+                          	
                   else echo "Branch not configured for deployment" exit 1
                   fi
 
