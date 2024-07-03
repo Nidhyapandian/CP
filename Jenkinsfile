@@ -20,10 +20,10 @@ pipeline {
                   script {
                     if (BRANCH_NAME == 'dev') {
                         // Build and push to dev repository
-                        docker.build("nginximage:latest").push("${DOCKER_REPO_DEV}
+                        docker.build("nginximage:latest").push("${DOCKER_REPO_DEV})
                     } else if (BRANCH_NAME == 'main') {
                         // Build and push to prod repository
-                        docker.build("nginximage:latest").push("${DOCKER_REPO_PROD}
+                        docker.build("nginximage:latest").push("${DOCKER_REPO_PROD})
                     } else {
                         echo "Not on a branch that requires Docker image build."
                    }                 
