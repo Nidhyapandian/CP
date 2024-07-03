@@ -7,7 +7,6 @@ pipeline {
         sh './build.sh'
       }
     } 
-  }
   
      stage('Deploy') {
       steps {
