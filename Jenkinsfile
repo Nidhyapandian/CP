@@ -12,7 +12,7 @@ pipeline {
         DEV_DOCKER_REPO = "smart24/dev:v1"
         PROD_DOCKER_REPO = "smart24/prod:v2"
     }
-	  
+  
      stage('Deploy') {
       steps {
         withCredentials([usernamePassword(credentialsId: "${DOCKER_REGISTRY_CREDS}", passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
@@ -49,5 +49,5 @@ pipeline {
         }
     }
 }
-
+}
    
