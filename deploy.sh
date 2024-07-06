@@ -2,16 +2,17 @@
 # GET CURRENT BRANCH:
 def BRANCH_NAME ='${GIT_BRANCH.split/.last()'
 
-@BRANCH_NAME = $(git rev-parse --abbrev -ref HEAD)
-
-
-if [[ "${BRANCH_NAME}" == "dev" ]]; then
+if [ "${BRANCH_NAME}" -eq "dev" ]
+then
 
 	./build.sh
+ 	echo "haiiii"
 	DOCKER_REPO="smart24/nginximage-dev"
 
-elif [[ "${BRANCH_NAME}" == "main" ]]; then
+elif [ "${BRANCH_NAME}" -eq "main" ]
+then
 	./build.sh
+ 	echo "mainnnnnnn"
 	DOCKER_REPO ="smart24/ngincimage-prod"
 	
 else echo "Branch not configured for deployment" exit 1
