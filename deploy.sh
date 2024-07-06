@@ -1,5 +1,5 @@
 #!/bin/bash
-
+ echo "Current branch is: ${BRANCH_NAME}"
 if [ "${BRANCH_NAME}" -eq "dev" ]
 then
 
