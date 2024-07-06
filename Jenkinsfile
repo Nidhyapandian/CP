@@ -22,6 +22,7 @@ pipeline {
             sh "echo \$DOCKER_PASSWORD | docker login -u \$DOCKER_USERNAME --password-stdin docker.io"   
             sh 'docker-compose down'
             sh 'chmod +x deploy.sh'
+              echo "Current branch is: ${BRANCH_NAME}"
             sh './deploy.sh'
             }
           }
