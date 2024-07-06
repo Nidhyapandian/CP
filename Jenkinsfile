@@ -21,8 +21,8 @@ pipeline {
            withCredentials([usernamePassword(credentialsId: "${DOCKER_REGISTRY_CREDS}", passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
             sh "echo \$DOCKER_PASSWORD | docker login -u \$DOCKER_USERNAME --password-stdin docker.io"   
             sh 'docker-compose down'
+             echo "Current branch is also: ${BRANCH_NAME}"           
             sh 'chmod +x deploy.sh'
-              echo "Current branch is: ${BRANCH_NAME}"
             sh './deploy.sh'
             }
           }
