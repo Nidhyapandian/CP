@@ -4,7 +4,7 @@ if [ "${BRANCH_NAME}" -eq "dev" ]
 then
 
 	./build.sh
- 	echo "haiiii dev  "
+ 	echo "This is dev branch  "
       docker tag nginximage smart24/dev:dev
     echo "Pushing Docker image to Docker Hub..."
     docker push smart24/dev:dev
