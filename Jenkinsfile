@@ -12,18 +12,22 @@ pipeline {
                 script {
                     def BRANCH_NAME = env.GIT_BRANCH.split('/').last()
                     echo "Current branch is: ${BRANCH_NAME}"
-                    // Perform actions based on BRANCH_NAME
-                }
-            }
-        }
+                       }
+                   }
+               }
       stage('Deploy') {
         steps {
            withCredentials([usernamePassword(credentialsId: "${DOCKER_REGISTRY_CREDS}", passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
-            sh "echo \$DOCKER_PASSWORD | docker login -u \$DOCKER_USERNAME --password-stdin docker.io"   
-            sh 'docker-compose down'
+             sh "echo \$DOCKER_PASSWORD | docker login -u \$DOCKER_USERNAME --password-stdin docker.io"   
+             sh 'docker-compose down'
+             sh 'chmod +x build.sh'
+             sh './build.sh'
              echo "Current branch is also: ${BRANCH_NAME}"           
-            sh 'chmod +x deploy.sh'
-            sh './deploy.sh'
+             sh 'docker tag nginximage smart24/dev:dev'
+             echo "Pushing Docker image to Docker Hub..."
+             sh 'docker push smart24/dev:v1'
+             echo "Docker image pushed successfully."
+            
             }
           }
          }
