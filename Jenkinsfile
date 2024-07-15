@@ -23,7 +23,7 @@ pipeline {
              sh 'chmod +x build.sh'
              sh './build.sh'
              echo "Current branch is also: ${BRANCH_NAME}"           
-             sh 'docker tag nginximage smart24/dev:dev'
+             sh 'docker tag nginximage smart24/dev:v1'
              echo "Pushing Docker image to Docker Hub..."
              sh 'docker push smart24/dev:v1'
              echo "Docker image pushed successfully."
